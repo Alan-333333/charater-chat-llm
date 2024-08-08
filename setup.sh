@@ -38,5 +38,11 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# 设置 LOCALAI_SERVICE_URL 环境变量
+echo "Setting LOCALAI_SERVICE_URL environment variable"
+echo "export LOCALAI_SERVICE_URL=http://localhost:8080" >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+chmod +x $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+
 echo "Environment setup completed successfully!"
 echo "To activate this environment, use: conda activate $ENV_NAME"
+echo "LOCALAI_SERVICE_URL is set to http://localhost:8080. You can modify this in $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh"
