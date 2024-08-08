@@ -16,6 +16,9 @@ SHELL ["conda", "run", "-n", "charater-chat-llm-env", "/bin/bash", "-c"]
 # 复制应用代码
 COPY . .
 
+# 设置 LOCALAI_SERVICE_URL 环境变量
+ENV LOCALAI_SERVICE_URL=http://local-ai:8080
+
 # 暴露端口（假设你的应用运行在 5000 端口）
 EXPOSE 5000
 

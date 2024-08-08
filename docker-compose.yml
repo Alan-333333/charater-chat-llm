@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  local-ai:
+    image: localai/localai:latest-aio-gpu-nvidia-cuda-12
+    container_name: local-ai
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  character-chat-llm:
+    build: .
+    container_name: character-chat-llm
+    ports:
+      - "5000:5000"
+    environment:
+      - LOCALAI_SERVICE_URL=http://local-ai:8080
+    depends_on:
+      local-ai:
+        condition: service_healthy
+    volumes:
+      - ./app:/app
+    command: python chat_api.py
+
+networks:
+  default:
+    name: ai-network

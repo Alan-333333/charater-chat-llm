@@ -6,6 +6,7 @@ from backend_localai import backend_localai
 from deepl_translate_mixed_lang import translate_to_chinese
 from text_processor import process_translated_text
 import re
+import os
 
 app = Flask(__name__)
 # 设置日志
@@ -97,8 +98,9 @@ def contains_english(text):
 def get_or_create_chat_instance():
     global backend
     if backend is None:
+        localai_url = os.environ.get('LOCALAI_SERVICE_URL', 'http://local-ai:8080')
         backend = backend_localai(
-            "http://172.17.0.2:8080", "l3-8b-stheno-v3.2-iq-imatrix")
+                    localai_url, "l3-8b-stheno-v3.2-iq-imatrix")
         backend.max_length = 1000
 
     return chat(backend)

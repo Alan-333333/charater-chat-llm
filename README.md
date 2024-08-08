@@ -10,13 +10,18 @@
 - Web 界面：使用 Flask 提供简单的聊天界面
 - Docker 支持：便于部署和扩展
 
+
+## 依赖
+
+本项目主要依赖于 [LocalAI](https://github.com/mudler/LocalAI)，这是一个强大的本地运行 AI 模型的工具。在使用本项目之前，请确保你已经正确安装和配置了 LocalAI。
+
 ## 安装
 
 ### 使用 Docker（推荐）
 
 1. 克隆仓库：
    ```
-   git clone [https://github.com/Alan-333333/charater-chat-llm]
+   git clone https://github.com/Alan-333333/charater-chat-llm
    cd character-chat-llm
    ```
 
@@ -113,8 +118,3 @@
 ## 贡献
 
 欢迎提交问题和拉取请求。
-
-## 许可证
-
-请查看 `LICENSE` 文件。
-```
